@@ -1,0 +1,2 @@
+Program_01:Write a JDBC program to retrieve empResume based on empPhNo and
+store that resume(file) at any location in your system.
