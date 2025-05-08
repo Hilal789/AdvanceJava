@@ -1,0 +1,20 @@
+===================
+  1  create or replace function emp_search(Eid number) return varchar2 as
+  2  V_name varchar2(30);
+  3  begin
+  4  select FNAME into V_name from emp where id= Eid;
+  5  return V_name;
+  6* end;
+SQL> /
+================
+
+Program Statement02:
+====================
+Step01=>Create Table:emp_info
+Columns:empId,empName,empAddress,empSalary,empPhNo.
+Step02: Construct Function to retrieve Employee's name based on Employee Id.
+step03: Construct JDBC Application to execute function.
+
+
+
+Note: id must be once.....

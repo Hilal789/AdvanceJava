@@ -29,9 +29,9 @@ public class RetrivedData {
 			cs.execute();
 
 			System.out.println("Id=" + id);
-			System.out.println("Name =" + cs.getString(2));
-			System.out.println("Patient Disease="+cs.getString(3));
-			System.out.println("House No:"+cs.getInt(4));
+			System.out.println("Name : " + cs.getString(2));
+			System.out.println("Patient Disease: "+cs.getString(3));
+			System.out.println("House No: "+cs.getInt(4));
 			System.out.println("City: "+cs.getString(5));
 			System.out.println("Pin Code: "+cs.getInt(6));
 			System.out.println("Email:"+cs.getString(7));
