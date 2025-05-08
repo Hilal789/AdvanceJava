@@ -18,7 +18,6 @@ public class RetrivedData {
 			int id = sc.nextInt();
 
 			cs.setInt(1, id);
-
 			cs.registerOutParameter(2, Types.CHAR);
 			cs.registerOutParameter(3, Types.CHAR);
 			cs.registerOutParameter(4, Types.INTEGER);
@@ -31,6 +30,12 @@ public class RetrivedData {
 
 			System.out.println("Id=" + id);
 			System.out.println("Name =" + cs.getString(2));
+			System.out.println("Patient Disease="+cs.getString(3));
+			System.out.println("House No:"+cs.getInt(4));
+			System.out.println("City: "+cs.getString(5));
+			System.out.println("Pin Code: "+cs.getInt(6));
+			System.out.println("Email:"+cs.getString(7));
+			System.out.println("Phone No: "+cs.getLong(8));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
