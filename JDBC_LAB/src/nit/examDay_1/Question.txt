@@ -1,0 +1,42 @@
+
+1)
+
+Product Inventory System
+Objective: Track product details in an inventory management system.
+
+Product Class:
+---------------
+Attributes:
+String productId
+String productName
+String category // category can be Electronics,books,furniture
+int quantity
+double price
+String supplier //any orgnization Name
+
+Functional Requirements:
+-------------------------
+- Use instance variables.
+- Create method insertProduct(...) that:
+- Connects to Oracle DB.
+- Inserts values into ProductTable.
+- Uses PreparedStatement with ? placeholders.
+- Confirms with "Product record inserted successfully" on success.
+- Exception handling with error output.
+
+InventoryApp Class:
+-------------------
+- Create 3 Product objects and insert them.
+- Optionally, include method displayProductsByCategory(String category) to:
+- Show products under the specified category.
+
+
+Step Marking :-
+
+1) Connection Establishments :- 5 Marks
+2) Use of proper type of statement to Enhance performance :- 5 Marks
+3) Product inseted into DB successfully :- 5 Marks
+4) Handling Exception :- 5 Marks 
+5) closing connection :- 5 Marks
+6) Fetch the products from the database under the specified category :- 5 Marks
+
