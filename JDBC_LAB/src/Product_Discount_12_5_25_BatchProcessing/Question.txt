@@ -1,0 +1,22 @@
+Program02: Product Discount Campaign
+Table Name: Product_Info
+
+Columns:
+
+productId (INT)
+
+productName (VARCHAR)
+
+productPrice (DOUBLE)
+
+discountPercent (DOUBLE)
+
+Using Batch Processing, perform:
+
+Insert products into table.
+
+Apply discount to all products by updating price:
+newPrice = price - (price × discountPercent/100)
+
+Delete products whose price after discount falls below ₹100.
+

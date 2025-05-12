@@ -1,0 +1,22 @@
+Program01: Car Rental System
+=============================
+Table Name: Car_Info
+
+Columns:
+
+carId (INT)
+
+carModel (VARCHAR)
+
+carRatePerDay (DOUBLE)
+
+availabilityStatus (VARCHAR)
+
+Using Batch Processing, perform:
+
+.Insert available cars.
+
+.Update availabilityStatus of few cars to "Booked".
+
+.Delete all cars where carRatePerDay > ₹10,000 (Luxury segment moving to premium database).
+
