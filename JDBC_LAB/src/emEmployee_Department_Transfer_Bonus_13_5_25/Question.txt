@@ -1,0 +1,36 @@
+Question Variant 1: Employee Department Transfer Bonus
+======================================================
+Problem Statement:
+------------------
+Develop a Java JDBC program to update department transfers along with bonus alterations for employees in an Oracle database:
+
+Steps:
+
+Connect to an Oracle database.
+
+Disable auto-commit mode.
+
+Create a table employees with these columns:
+
+emp_id (INT)
+
+emp_name (VARCHAR)
+
+department (VARCHAR)
+
+bonus (DOUBLE)
+
+Within a transaction, insert the following employees:
+
+Employee 1: ID = 401, Name = "Hannah", Department = "Sales", Bonus = 2500.00
+
+Employee 2: ID = 402, Name = "Ian", Department = "Marketing", Bonus = 3000.00
+
+Then, update all employees by transferring them to the "Operations" department and increasing their bonus by ₹800.
+
+Finally, if any employee’s bonus becomes greater than ₹4000 as a result of the update, rollback the transaction and print:
+
+"Bonus limit exceeded post-transfer! Transaction rolled back."
+Otherwise, commit the transaction and print:
+
+"Department transfer and bonus updates committed successfully."
