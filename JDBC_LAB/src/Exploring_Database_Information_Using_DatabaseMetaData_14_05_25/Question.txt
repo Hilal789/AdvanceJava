@@ -1,0 +1,49 @@
+
+Connects to a Oracle database using JDBC.
+
+Retrieves the DatabaseMetaData object from the connection.
+
+Displays the following information:
+
+.Database product name and version
+
+.JDBC driver name and version
+
+.Username used for the connection
+
+.List of available tables in the database
+Supported SQL features like:
+
+.Batch updates
+
+.Transactions
+
+.Stored procedures
+
+.Scrollable result sets
+
+.Whether catalogs and schemas are supported
+
+
+✅ Requirements:
+Use the following DatabaseMetaData methods:
+
+getDatabaseProductName()
+
+getDatabaseProductVersion()
+
+getDriverName(), getDriverVersion()
+
+getUserName()
+
+getTables(null, null, "%", new String[]{"TABLE"})
+
+supportsBatchUpdates(), supportsTransactions()
+
+supportsStoredProcedures()
+
+supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE)
+
+supportsCatalogsInTableDefinitions()
+
+Print output in a clear, user-friendly format
