@@ -1,0 +1,58 @@
+
+Announcement: "Program01: Exploring Table Structure…"
+rahman khan
+Created 4:18 PM4:18 PM
+Program01: Exploring Table Structure Dynamically Using ResultSetMetaData
+
+🔍 Scenario:
+You are working as a Java developer on an internal admin tool that interacts with the organization's database. The requirement is to build a generic utility that can:
+Connect to a Oracle database.
+Retrieve data from any given table.
+Display both the data and metadata information about the table dynamically.
+Ensure that no column names or data types are hardcoded, making the program reusable.
+The goal is to explore table structure and data at runtime using the ResultSetMetaData interface.
+
+🛠️ Objective:
+--------------
+Write a Java program that performs the following:
+
+Connects to a MySQL database using JDBC.
+
+Executes a SQL query: SELECT * FROM your_table;
+
+Uses ResultSetMetaData to fetch and print the following metadata for each column:
+
+Column name
+
+Column label
+
+Column type (name and integer value)
+
+Column display size
+
+Whether the column is nullable
+
+Whether the column is auto-incremented
+
+Prints all the data from the table in a tabular format.
+
+Handles exceptions using try-catch and uses try-with-resources for automatic resource management.
+
+Requirements:
+Use ResultSetMetaData methods like:
+
+getColumnName(int)
+
+getColumnLabel(int)
+
+getColumnTypeName(int)
+
+getColumnDisplaySize(int)
+
+isNullable(int)
+
+isAutoIncrement(int)
+
+Use loops to avoid hardcoding column count or names
+
+Use rs.getString(i) for printing data
