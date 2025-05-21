@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+
+	margin-bottom: 20px ;
+	
+	text-align: center;
+}
+
+form{
+	display: flex;
+	
+	justify-content: center;
+	flex-direction: column;
+	margin-left: 90vh;
+	
+}
+label{
+	
+}
+
+input{
+	
+	height: 25px;
+	width: 40vh;
+}
+
+button{
+	
+	margin-top: 20px;
+	width: 60px;
+	height:40px;
+}
