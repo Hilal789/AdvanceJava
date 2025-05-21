@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<div class="heading">
+		<h1>Employee Registration</h1>
+	</div>
+
+	<div class="main">
+
+		<form action="homePage" method="get">
+			<label for="name">Employee Name: </label> <input type="text"
+				name="name"> <label for="email">Email </label> <input
+				type="text" name="email"> <label>Gender:</label>
+			<div class="inline-group">
+				<input type="radio" id="male" name="gender" value="Male"> <label
+					for="male">Male</label> <input type="radio" id="female"
+					name="gender" value="Female"> <label for="female">Female</label>
+				<input type="radio" id="other" name="gender" value="Others">
+				<label for="other">Other</label>
+			</div>
+
+			<label>Skills:</label>
+			<div class="inline-group">
+				<input type="checkbox" id="java" name="skills" value="Java">
+				<label for="java">Java</label> <input type="checkbox" id="Python"
+					name="skills" value="Python"> <label for="Python">Python</label>
+				<input type="checkbox" id="SQL" name="skills" value="SQL"> <label
+					for="SQL">SQL</label> <input type="checkbox" id="React"
+					name="skills" value="React"> <label for="React">React</label>
+			</div>
+
+			<label>Employee Type:</label>
+			<div class="inline-group">
+			 <input type="radio" id="full"
+				name="type" value="Full-time"> <label for="full">Full-time</label>
+
+			<input type="radio" id="part" name="type" value="Part-time">
+			<label for="part">Part-time</label>
+			</div>
+
+			<button type="submit">Display</button>
+		</form>
+
+	</div>
+
+</body>
+</html>

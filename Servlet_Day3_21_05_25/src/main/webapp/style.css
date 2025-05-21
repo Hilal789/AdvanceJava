@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* Heading Section */
+.heading {
+    text-align: center;
+    background-color: #0073e6;
+    color: white;
+    padding: 15px;
+}
+
+.heading h1 {
+    margin: 0;
+}
+
+/* Main Form Container */
+.main {
+    max-width: 500px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels */
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Input Fields */
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Radio & Checkbox Styling */
+input[type="radio"],
+input[type="checkbox"] {
+	
+    margin-right: 5px;
+}
+
+/* Ensure checkboxes and radio buttons appear inline */
+.inline-group {
+    display: flex;
+    gap: 15px; /* Space between elements */
+    align-items: center;
+}
+
+/* Improve alignment and spacing */
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Button */
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
