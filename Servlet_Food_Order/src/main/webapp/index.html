@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Food order </title>
+</head>
+<body>
+
+ <h1>Pizza Order Form</h1>
+  <form action="submitorder" method="POST">
+    
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="crust">Select the crust:</label>
+    <select id="crust" name="crust">
+      <option value="deep">Deep Crust</option>
+      <option value="other">Another</option>
+    </select><br><br>
+
+    <p>Select toppings:</p>
+    <input type="checkbox" id="peas" name="toppings" value="peas">
+    <label for="peas">Peas</label><br>
+
+    <input type="checkbox" id="paneer" name="toppings" value="paneer">
+    <label for="paneer">Paneer</label><br>
+
+    <input type="checkbox" id="red_peppers" name="toppings" value="red_peppers">
+    <label for="red_peppers">Red Peppers</label><br>
+
+    <input type="checkbox" id="pineapple" name="toppings" value="pineapple">
+    <label for="pineapple">Pineapple</label><br>
+
+    <input type="checkbox" id="onion" name="toppings" value="onion">
+    <label for="onion">Onion</label><br>
+
+    <input type="checkbox" id="tomato" name="toppings" value="tomato">
+    <label for="tomato">Tomato</label><br><br>
+
+    <p>Select 1 free appetizer:</p>
+    <input type="radio" id="garlic_bread" name="appetizer" value="Garlic Bread" required>
+    <label for="garlic_bread">Garlic Bread</label><br>
+
+    <input type="radio" id="cheese_garlic_bread" name="appetizer" value="cheese_garlic_bread">
+    <label for="cheese_garlic_bread">Cheese Garlic Bread</label><br>
+
+    <input type="radio" id="veg_soup" name="appetizer" value="veg_soup">
+    <label for="veg_soup">Veg Soup</label><br><br>
+
+    <label for="address">Address:</label><br>
+    <textarea id="address" name="address" rows="4" cols="40" required></textarea><br><br>
+
+    <p>Select payment option:</p>
+    <input type="radio" id="credit_card" name="payment" value="Credit Card" required>
+    <label for="credit_card">Credit Card</label><br>
+
+    <input type="radio" id="debit_card" name="payment" value="Debit Card">
+    <label for="debit_card">Debit Card</label><br>
+
+    <input type="radio" id="cash" name="payment" value="cash">
+    <label for="cash">Cash</label><br><br>
+
+    <label for="card_number">Credit Card Number:</label>
+    <input type="text" id="card_number" name="card_number" required><br><br>
+
+    <label for="repeat_card_number">Repeat Credit Card Number:</label>
+    <input type="text" id="repeat_card_number" name="repeat_card_number" required><br><br>
+
+    <input type="submit" value="Place Order">
+  </form>
+
+</body>
+</html>
