@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo jsp</title>
+</head>
+<body>
+	<h2>User Registration Form</h2>
+  <form action="display" method="post">
+    <label for="username">User Name:</label><br>
+    <input type="text" id="username" name="username" required><br><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <label for="firstname">First Name:</label><br>
+    <input type="text" id="firstname" name="firstname" required><br><br>
+
+    <label for="lastname">Last Name:</label><br>
+    <input type="text" id="lastname" name="lastname" required><br><br>
+
+    <label for="city">City:</label><br>
+    <input type="text" id="city" name="city"><br><br>
+
+    <label for="state">State:</label><br>
+    <input type="text" id="state" name="state"><br><br>
+
+    <label for="pincode">Pin Code:</label><br>
+    <input type="text" id="pincode" name="pincode" pattern="\d{6}" title="Enter a 6-digit pin code"><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="phoneno">Phone Number:</label><br>
+    <input type="tel" id="phoneno" name="phoneno" pattern="[0-9]{10}" title="Enter a 10-digit phone number"><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
