@@ -9,7 +9,11 @@ body {
 	background-repeat: no-repeat;
 	  background-size: cover;
 backdrop-filter: blur(10px);	
-	margin: 50px;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction:column;
+height:100vh;
 }
 
 h2 {
@@ -17,13 +21,12 @@ h2 {
 }
 
 form {
-	
-	margin-left: 35%;
-	max-width: 400px;
+	width: 40vw;
 	padding: 20px;
 	border: 1px solid #ccc;
 	border-radius: 10px;
 	box-shadow: 2px 2px 12px #aaa;
+	
 }
 
 label, input {

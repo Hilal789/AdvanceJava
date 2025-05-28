@@ -26,7 +26,7 @@ public class attandanceTrack  extends GenericServlet{
 		
 		double total = Double.parseDouble(req.getParameter("total"));//300
 		
-		double percentage =	total/(available/100);
+		double percentage =	(available/total)*100;
 		
 //		DecimalFormat df=new DecimalFormat("00.00");
 //		String per=df.format(percentage);
