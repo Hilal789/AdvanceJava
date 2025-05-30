@@ -19,9 +19,7 @@ public class DBConnection {
 		if (con == null) {
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
-				System.out.println(url);
-				System.out.println(userName);
-				System.out.println(password);
+				
 				con = DriverManager.getConnection(url, userName, password);
 				
 
