@@ -1,7 +1,5 @@
 package com.nit.testRegister;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 
 public interface DBInfo {
 	public static final String driver="oracle.jdbc.driver.OracleDriver";
