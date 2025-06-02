@@ -18,16 +18,18 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		userBean ub = new LoginDAO().login(request.getParameter("uname"), request.getParameter("password"));
+		String uname = request.getParameter("uname");
+		String password = request.getParameter("password");
 		
-		if(ub!=null)
-		{
-			request.setAttribute("bean", ub);
-			request.getRequestDispatcher("loginSuccess.jsp").forward(request, response);
-			
-		}else {
-			
+		userBean bean =new  LoginDAO().login(uname, password);
+		
+		if(bean==null) {
+			request.setAttribute("msg", "Invalid credential");
 			request.getRequestDispatcher("loginUnSuccess.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "Login Successfull..");
+			request.setAttribute("bean", bean);
+			request.getRequestDispatcher("loginSuccess.jsp").forward(request, response);
 		}
 		
 	}
