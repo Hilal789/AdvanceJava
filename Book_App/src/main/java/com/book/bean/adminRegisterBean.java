@@ -43,11 +43,6 @@ public class adminRegisterBean implements Serializable{
 	public void setPhone(long phone) {
 		this.phone = phone;
 	}
-	@Override
-	public String toString() {
-		return "adminRegisterBean [name=" + name + ", pass=" + pass + ", fname=" + fname + ", lname=" + lname
-				+ ", mail=" + mail + ", phone=" + phone + "]";
-	}
 	
 	
 

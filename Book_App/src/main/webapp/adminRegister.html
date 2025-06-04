@@ -1,105 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Register New Admin</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  <meta charset="UTF-8" />
+  <title>Register New Admin</title>
+  <link rel="icon" href="Images/Bool_Logo.png" type="image/jpeg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        .register-box {
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            width: 360px;
-            text-align: center;
-        }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url('Images/backGround_main.jpg') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        h2 {
-            margin-bottom: 25px;
-            color: #333;
-        }
+    .register-box {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeSlideIn 1s ease;
+    }
 
-        label {
-            display: block;
-            text-align: left;
-            margin-bottom: 6px;
-            color: #555;
-        }
+    h2 {
+      margin-bottom: 25px;
+      color: #fff;
+      font-size: 24px;
+    }
 
-        input[type="text"],
-        input[type="password"],
-        input[type="email"],
-        input[type="tel"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box;
-        }
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 6px;
+      color: #eee;
+      font-size: 14px;
+    }
 
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.85);
+      box-sizing: border-box;
+      font-size: 15px;
+    }
 
-        button:hover {
-            background: #45a049;
-        }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #4CAF50, #2E7D32);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-        .login-link {
-            margin-top: 15px;
-            display: block;
-            color: #007BFF;
-            text-decoration: none;
-        }
+    button:hover {
+      background: linear-gradient(135deg, #66BB6A, #388E3C);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
 
-        .login-link:hover {
-            text-decoration: underline;
-        }
-    </style>
+    .login-link {
+      margin-top: 15px;
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+
+    .login-link:hover {
+      color: #AED6F1;
+      text-decoration: underline;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .register-box {
+        padding: 30px 20px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      input,
+      button {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="register-box">
-        <h2>Register New Admin</h2>
-        <form action="adminRegisterReq" method="post">
-            <label for="adminName">Admin Name:</label>
-            <input type="text" id="adminName" name="adminName" required>
+  <div class="register-box">
+    <h2>Register New Admin</h2>
+    <form action="adminRegisterReq" method="post">
+      <label for="adminName">Admin Name:</label>
+      <input type="text" id="adminName" name="adminName" required />
 
-            <label for="adminPassword">Password:</label>
-            <input type="password" id="adminPassword" name="adminPassword" required>
+      <label for="adminPassword">Password:</label>
+      <input type="password" id="adminPassword" name="adminPassword" required />
 
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" required>
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required />
 
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" required>
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required />
 
-            <label for="email">Email ID:</label>
-            <input type="email" id="email" name="email" required>
+      <label for="email">Email ID:</label>
+      <input type="email" id="email" name="email" required />
 
-            <label for="phone">Phone No:</label>
-            <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}">
+      <label for="phone">Phone No:</label>
+      <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" />
 
-            <button type="submit">Register</button>
-        </form>
-        <a href="adminLogin.html" class="login-link">Already have an account? Login here</a>
-    </div>
+      <button type="submit">Register</button>
+    </form>
+    <a href="adminLogin.html" class="login-link">Already have an account? Login here</a>
+  </div>
 </body>
 </html>

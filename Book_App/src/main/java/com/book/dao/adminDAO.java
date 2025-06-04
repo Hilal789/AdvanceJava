@@ -13,7 +13,7 @@ public class adminDAO {
 		try {
 
 			Connection con = DBConnection.getCon();
-			System.out.println(con);
+			//System.out.println(con);
 			PreparedStatement ps = con.prepareStatement("insert into book_app values(?,?,?,?,?,?)");
 			System.out.println(ub);
 			ps.setString(1, ub.getName());
