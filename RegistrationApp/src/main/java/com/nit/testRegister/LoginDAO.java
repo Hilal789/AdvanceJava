@@ -1,36 +1,33 @@
 package com.nit.testRegister;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.DriverManager;
 
-public class LoginDAO {
-	// create a method to login(userBean ub)... use JDBC login to retrieve the data
-	// from db
+//DataBase connection point
+public class DBConnection {
+	
+	
+	private static Connection con = null;
+	static String url = DBInfo.url;
+	static String password = DBInfo.password;
+	static String userName = DBInfo.userName;
+	
+	private DBConnection(){};
 
-	public userBean ub;
+	
+	public static Connection getCon() {
+		if (con == null) {
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				
+				con = DriverManager.getConnection(url, userName, password);
+				
 
-	public userBean login(String uname, String password) {
-
-		try {
-			Connection con = DBConnection.getCon();
-			System.out.println(con);
-			PreparedStatement ps = con.prepareStatement("select * from userdb where username=? and password =? ");
-			ps.setString(1, uname);
-			ps.setString(2, password);
-			ResultSet rs = ps.executeQuery();
-
-			if (rs.next()) {
-				ub = new userBean();
-				ub.setUsername(rs.getString(1));
-				ub.setPassword(rs.getString(2));
-							
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		return ub;
+		return con;
 	}
-
+	
 }

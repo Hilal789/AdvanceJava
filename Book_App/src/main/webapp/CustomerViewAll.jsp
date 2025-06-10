@@ -10,7 +10,6 @@
 <title>All Books</title>
 <link rel="icon" href="Images/Bool_Logo.png" type="image/jpeg" />
 <style>
-
   body, html {
     margin: 0;
     padding: 0;
@@ -64,48 +63,6 @@
     transition: background-color 0.3s ease;
   }
 
-  /* Button container */
-  .action-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-
-  /* Buttons */
-  .action-buttons a {
-    text-decoration: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: 0.3s all ease;
-    color: white;
-    display: inline-block;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-    text-align: center;
-  }
-
-  /* Delete Button */
-  .delete-btn {
-    background: linear-gradient(to right, #e52d27, #b31217);
-  }
-
-  .delete-btn:hover {
-    background: linear-gradient(to right, #b31217, #7b0d0d);
-    transform: scale(1.07);
-  }
-
-  /* Update Button */
-  .update-btn {
-    background: linear-gradient(to right, #00c853, #43a047);
-  }
-
-  .update-btn:hover {
-    background: linear-gradient(to right, #2e7d32, #1b5e20);
-    transform: scale(1.07);
-  }
-
-  /* Responsive */
   @media (max-width: 768px) {
     h1 {
       font-size: 2.2rem;
@@ -115,11 +72,6 @@
     table, th, td {
       font-size: 14px;
       padding: 12px;
-    }
-
-    .action-buttons a {
-      padding: 8px 14px;
-      font-size: 14px;
     }
   }
 
@@ -136,19 +88,8 @@
       font-size: 12px;
       padding: 10px;
     }
-
-    .action-buttons {
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .action-buttons a {
-      width: 100%;
-      box-sizing: border-box;
-    }
   }
 
-  /* Animations */
   @keyframes fadeInDown {
     0% { opacity: 0; transform: translateY(-40px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -157,6 +98,39 @@
   @keyframes fadeInUp {
     0% { opacity: 0; transform: translateY(40px); }
     100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .marquee {
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+  }
+
+  .marquee p {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: scrollText 15s linear infinite, rainbowText 5s linear infinite;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  @keyframes scrollText {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  @keyframes rainbowText {
+    0% { color: red; }
+    16% { color: orange; }
+    32% { color: yellow; }
+    48% { color: green; }
+    64% { color: blue; }
+    80% { color: indigo; }
+    100% { color: violet; }
   }
 </style>
 </head>
@@ -171,12 +145,11 @@
     <th>Author</th>
     <th>Type</th>
     <th>Year</th>
-    <th>Actions</th>
   </tr>
   <%
-  List<addBookBean> list = (List<addBookBean>) request.getAttribute("list");
+  List<CustomerViewBookBean> list = (List<CustomerViewBookBean>) request.getAttribute("list");
        if (list != null && !list.isEmpty()) {
-           for (addBookBean bb : list) {
+           for (CustomerViewBookBean bb : list) {
   %>
   <tr>
     <td><%= bb.getId() %></td>
@@ -184,22 +157,23 @@
     <td><%= bb.getAuthor() %></td>
     <td><%= bb.getType() %></td>
     <td><%= bb.getYear() %></td>
-    <td class="action-buttons">
- <a class="delete-btn" href="deleteBook.html">Delete</a>
-      <a class="update-btn" href="updateNewBook?pcode=<%=bb.getId()%>">Update</a> 
-    </td>
   </tr>
   <%
          }
      } else {
   %>
   <tr>
-    <td colspan="6" style="text-align:center; font-weight:bold; color:#555;">No books available</td>
+    <td colspan="5" style="text-align:center; font-weight:bold; color:#555;">No books available</td>
   </tr>
   <%
      }
   %>
 </table>
+
+<!-- Marquee Text -->
+<div class="marquee">
+  <p>If you want to buy, please contact 8391011744 phone</p>
+</div>
 
 </body>
 </html>

