@@ -186,7 +186,7 @@
     <td><%= bb.getYear() %></td>
     <td class="action-buttons">
  <a class="delete-btn" href="deleteBook.html">Delete</a>
-      <a class="update-btn" href="updateNewBook?pcode=<%=bb.getId()%>">Update</a> 
+      <a class="update-btn" href="updateBook.html">Update</a> 
     </td>
   </tr>
   <%
