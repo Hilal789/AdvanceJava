@@ -7,6 +7,7 @@ public class adminRegisterBean implements Serializable{
 	
 	private String name,pass,fname,lname,mail;
 	private long phone;
+	
 	public String getName() {
 		return name;
 	}

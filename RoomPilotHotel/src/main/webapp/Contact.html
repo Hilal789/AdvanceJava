@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - RoomPailot</title>
+  
+    <link rel="icon" href="Image/Logo.png" type="image/png">
+  
+  
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:ital,wght@0,100..1000;1,100..1000&family=Edu+VIC+WA+NT+Hand:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+    }
+
+    body {
+        font-family: "Roboto", sans-serif;
+    
+      overflow-x: hidden;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header Styles (Consistent across pages) */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      background-color: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      margin-right: 10px;
+      animation: pulse 2s infinite;
+    }
+
+    .logo h1 {
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    nav ul li a:hover {
+      color: #ffc107;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Hero-like Section for Background and Content (specific to contact page) */
+    .hero-contact { /* Unique class for contact hero section */
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      flex-grow: 1;
+      padding-top: 100px; /* Space for fixed header */
+      padding-bottom: 50px; /* Some padding at the bottom */
+    }
+
+    .hero-contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6); /* Slightly darker overlay for better form contrast */
+      z-index: 1;
+    }
+
+    /* Sliding Background Images */
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    /* Contact Page Specific Styles */
+    .contact-container { /* This will be the transparent box holding your form */
+      position: relative;
+      z-index: 2;
+      background-color: rgba(255, 255, 255, 0); /* Completely transparent */
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: none;
+      text-align: center;
+      max-width: 600px; /* Max-width for form container */
+      width: 95%; /* Responsive width */
+      color: white;
+    }
+
+    .contact-form { /* Styling for the actual form inside the transparent container */
+      background: rgba(255, 255, 255, 0.1); /* Semi-transparent background for the form itself */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow for visibility */
+      width: 100%;
+      max-width: 500px; /* Adjust as needed */
+      margin: 0 auto; /* Center the form horizontally */
+    }
+
+    .contact-form h2 {
+      margin-bottom: 25px;
+      text-align: center;
+      color: white; /* Changed heading color to white */
+      font-size: 2.2rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .contact-form label {
+      display: block;
+      margin: 15px 0 8px; /* Increased spacing */
+      color: white; /* Label color for contrast */
+      font-weight: 500;
+      text-align: left; /* Align labels to the left */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px; /* Increased padding */
+      border: 1px solid rgba(255, 255, 255, 0.5); /* Lighter border for transparent form */
+      background-color: rgba(255, 255, 255, 0.05); /* Very slight background for input fields */
+      border-radius: 6px;
+      font-size: 16px;
+      color: white; /* Input text color */
+      resize: vertical; /* Allow vertical resizing for textarea */
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        border-color: #ffc107; /* Highlight on focus */
+        background-color: rgba(255, 255, 255, 0.1);
+        outline: none; /* Remove default outline */
+    }
+
+    .contact-form ::placeholder { /* Styling for placeholder text */
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .contact-form button {
+      margin-top: 30px; /* Increased top margin */
+      padding: 15px 20px; /* Increased padding for button */
+      width: 100%;
+      background-color: #ffc107; /* Primary button color */
+      color: #333; /* Dark text for button */
+      font-size: 18px; /* Larger font size */
+      font-weight: 600;
+      border: none;
+      border-radius: 50px; /* Rounded button like main page */
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #ffd700; /* Lighter yellow on hover */
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+
+      .logo {
+        margin-bottom: 15px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav ul li {
+        margin: 5px 10px;
+      }
+
+      .hero-contact {
+        padding-top: 80px;
+      }
+
+      .contact-container {
+        padding: 20px;
+        width: 98%;
+      }
+
+      .contact-form {
+        padding: 20px;
+      }
+
+      .contact-form h2 {
+        font-size: 1.8rem;
+      }
+
+      .contact-form label,
+      .contact-form input,
+      .contact-form textarea,
+      .contact-form button {
+        font-size: 15px;
+        padding: 10px;
+      }
+
+      .contact-form button {
+        padding: 12px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+     <!--  <img src="Image/Logo.png" alt="Hotel Logo"> -->
+      <h1>RoomPailot</h1>
+    </div>
+    <nav>
+      <ul>
+         <li><a href="UserLoginSuccess.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="Services.html">Services</a></li>
+        <li><a href="Gallery.html">Gallery</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+    </nav>
+  </header>
+
+  <section class="hero-contact">
+    <div class="slide active" style="background-image: url('Image/B1.jpg');"></div>
+    <div class="slide" style="background-image: url('Image/B2.jpg');"></div>
+    <div class="slide" style="background-image: url('Image/B3.jpg');"></div>
+    <div class="slide" style="background-image: url('Image/B1.jpg');"></div>
+
+    <div class="contact-container">
+      <form class="contact-form" action="submitContact" method="post">
+        <h2>Contact Us</h2>
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your name" />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your email" />
+
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" required placeholder="Subject of your message" />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required placeholder="Your message here..."></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    // Background Image Slider (Consistent across pages)
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+
+    // Change slide every 5 seconds
+    setInterval(nextSlide, 5000);
+
+    // Mobile menu toggle (Consistent across pages)
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.createElement('div');
+      navToggle.className = 'nav-toggle';
+      navToggle.innerHTML = '☰';
+      navToggle.style.display = 'none';
+      navToggle.style.cursor = 'pointer';
+      navToggle.style.fontSize = '24px';
+      navToggle.style.color = 'white';
+      document.querySelector('header').prepend(navToggle);
+
+      function toggleMenu() {
+        const nav = document.querySelector('nav ul');
+        if (nav.style.display === 'flex') {
+          nav.style.display = 'none';
+        } else {
+          nav.style.display = 'flex';
+        }
+      }
+
+      navToggle.addEventListener('click', toggleMenu);
+
+      function checkScreenSize() {
+        const nav = document.querySelector('nav ul');
+        if (window.innerWidth <= 768) {
+          navToggle.style.display = 'block';
+          nav.style.display = 'none';
+        } else {
+          navToggle.style.display = 'none';
+          nav.style.display = 'flex';
+        }
+      }
+
+      window.addEventListener('resize', checkScreenSize);
+      checkScreenSize();
+    });
+  </script>
+</body>
+</html>

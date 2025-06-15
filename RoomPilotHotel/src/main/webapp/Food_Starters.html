@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starters - RoomPailot</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: "Roboto", sans-serif;
+    }
+
+    /* Header Styles (Consistent across pages) */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      background-color: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      margin-right: 10px;
+      animation: pulse 2s infinite;
+    }
+
+    .logo h1 {
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    nav ul li a:hover {
+      color: #ffc107;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Cart Icon in Header */
+    .cart-icon {
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+        position: relative;
+        margin-left: 20px;
+        transition: color 0.3s ease;
+    }
+    .cart-icon:hover {
+        color: #ffc107;
+    }
+    .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -10px;
+        background-color: #ffc107;
+        color: #333;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 50%;
+        padding: 2px 6px;
+        min-width: 20px;
+        text-align: center;
+        line-height: 1;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+
+    /* Hero-like Section for Background and Content (specific to foods page) */
+    .hero-foods { /* Unique class for foods hero section */
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      flex-grow: 1;
+      padding-top: 100px; /* Space for fixed header */
+      padding-bottom: 50px; /* Some padding at the bottom */
+    }
+
+    .hero-foods::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6); /* Slightly darker overlay for better content contrast */
+      z-index: 1;
+    }
+
+    /* Sliding Background Images */
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    /* Foods Page Specific Styles */
+    .foods-container { /* Unique class for foods content container */
+      position: relative;
+      z-index: 2;
+      background-color: rgba(255, 255, 255, 0); /* Completely transparent */
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: none;
+      text-align: center;
+      max-width: 1200px; /* Wider max-width for food grid */
+      width: 95%; /* Responsive width */
+      color: white;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+      color: white;
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid for food items */
+      gap: 30px;
+      justify-content: center;
+      align-items: start;
+    }
+
+    .food-item {
+      background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background for each item */
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Shadow for items */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding-bottom: 20px; /* Padding for content below image */
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center content within item */
+      text-align: center;
+    }
+
+    .food-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .food-item img {
+      width: 100%;
+      height: 200px; /* Fixed height for consistent image size */
+      object-fit: cover; /* Cover the area, cropping if necessary */
+      display: block;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .food-item h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #ffc107; /* Food name color */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      padding: 0 15px; /* Add horizontal padding to name */
+    }
+
+    .food-item .food-price {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: white; /* Price color */
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Center the quantity controls */
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .quantity-control label {
+      font-size: 1rem;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .quantity-control input[type="number"] {
+      width: 70px; /* Fixed width for quantity input */
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.05);
+      color: white;
+      font-size: 1rem;
+      text-align: center; /* Center text in input */
+      -moz-appearance: textfield; /* Hide Firefox number input arrows */
+    }
+    /* Hide Chrome/Safari/Edge number input arrows */
+    .quantity-control input[type="number"]::-webkit-outer-spin-button,
+    .quantity-control input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+
+    .add-to-cart-btn {
+      background-color: #ffc107;
+      color: #333;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 10px; /* Space between quantity and button */
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: #ffd700;
+      transform: translateY(-2px);
+    }
+
+    /* Cart Overlay Styles */
+    .cart-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: flex-end; /* Push cart content to the right */
+        z-index: 2000;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0.3s, opacity 0.3s ease-in-out;
+    }
+
+    .cart-overlay.show {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .cart-sidebar {
+        background-color: #333; /* Dark background for the cart */
+        width: 350px;
+        max-width: 90%;
+        height: 100%;
+        padding: 20px;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+        color: white;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cart-overlay.show .cart-sidebar {
+        transform: translateX(0);
+    }
+
+    .cart-sidebar h2 {
+        color: #ffc107;
+        margin-bottom: 20px;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 10px;
+        text-align: center;
+    }
+
+    .cart-items {
+        flex-grow: 1; /* Allows cart items to take available space */
+        overflow-y: auto; /* Scroll if too many items */
+        margin-bottom: 20px;
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .cart-item:last-child {
+        border-bottom: none;
+    }
+
+    .cart-item-info {
+        flex-grow: 1;
+    }
+
+    .cart-item-info h4 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: white;
+    }
+
+    .cart-item-info p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .cart-item-price {
+        font-weight: bold;
+        color: #ffc107;
+        margin-right: 15px; /* Space between price and remove button */
+    }
+
+    .remove-item-btn {
+        background: none;
+        border: none;
+        color: rgba(255, 0, 0, 0.7); /* Reddish color for remove */
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .remove-item-btn:hover {
+        color: red;
+        transform: scale(1.1);
+    }
+
+
+    .cart-total {
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 2px solid #ffc107;
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: white;
+    }
+
+    .close-cart-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2rem;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+    .close-cart-btn:hover {
+        color: #ffc107;
+    }
+
+    /* Responsive adjustments for cart */
+    @media (max-width: 480px) {
+        .cart-sidebar {
+            width: 100%; /* Full width on very small screens */
+        }
+        .cart-item {
+            flex-wrap: wrap; /* Allow items to wrap on small screens */
+        }
+        .cart-item-info {
+            width: 100%; /* Take full width */
+            margin-bottom: 5px; /* Space below info */
+        }
+        .cart-item-price {
+            margin-right: 0; /* Remove right margin */
+        }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="Image/Logo.png" alt="Hotel Logo">
+      <h1>RoomPailot</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="UserLoginSuccess.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="Services.html">Services</a></li>
+        <li><a href="Gallery.html">Gallery</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="cart-icon" id="cartIcon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+  </header>
+
+  <section class="hero-foods">
+    <div class="slide active" style="background-image: url('Image/B1.jpg');"></div>
+    <div class="slide" style="background-image: url('Image/B2.jpg');"></div>
+    <div class="slide" style="background-image: url('Image/B3.jpg');"></div>
+    <div class="slide" style="background-image: url('Image/B1.jpg');"></div>
+
+    <div class="foods-container">
+      <h1>Delicious Starters</h1>
+      <div class="food-grid">
+
+        <div class="food-item" data-food-id="crispy-spring-rolls" data-food-name="Crispy Spring Rolls" data-food-price="8.99">
+          <img src="https://placehold.co/600x400/FFD700/000000?text=Crispy+Spring+Rolls" alt="Crispy Spring Rolls">
+          <h3>Crispy Spring Rolls</h3>
+          <p class="food-price">$8.99</p>
+          <div class="quantity-control">
+            <label for="qty1">Quantity:</label>
+            <input type="number" id="qty1" class="food-qty" value="1" min="1" max="10">
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+
+        <div class="food-item" data-food-id="garlic-prawns" data-food-name="Garlic Prawns Skewers" data-food-price="14.50">
+          <img src="https://placehold.co/600x400/A0E0B0/000000?text=Garlic+Prawns" alt="Garlic Prawns">
+          <h3>Garlic Prawns Skewers</h3>
+          <p class="food-price">$14.50</p>
+          <div class="quantity-control">
+            <label for="qty2">Quantity:</label>
+            <input type="number" id="qty2" class="food-qty" value="1" min="1" max="10">
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+
+        <div class="food-item" data-food-id="caprese-skewers" data-food-name="Caprese Skewers" data-food-price="9.25">
+          <img src="https://placehold.co/600x400/FFC0CB/000000?text=Caprese+Salad" alt="Caprese Salad">
+          <h3>Caprese Skewers</h3>
+          <p class="food-price">$9.25</p>
+          <div class="quantity-control">
+            <label for="qty3">Quantity:</label>
+            <input type="number" id="qty3" class="food-qty" value="1" min="1" max="10">
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+
+        <div class="food-item" data-food-id="spicy-chicken-wings" data-food-name="Spicy Chicken Wings" data-food-price="11.75">
+          <img src="https://placehold.co/600x400/ADD8E6/000000?text=Chicken+Wings" alt="Spicy Chicken Wings">
+          <h3>Spicy Chicken Wings</h3>
+          <p class="food-price">$11.75</p>
+          <div class="quantity-control">
+            <label for="qty4">Quantity:</label>
+            <input type="number" id="qty4" class="food-qty" value="1" min="1" max="10">
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+        
+        <div class="food-item" data-food-id="loaded-nachos" data-food-name="Loaded Nachos Grande" data-food-price="10.00">
+          <img src="https://placehold.co/600x400/DA70D6/000000?text=Loaded+Nachos" alt="Loaded Nachos">
+          <h3>Loaded Nachos Grande</h3>
+          <p class="food-price">$10.00</p>
+          <div class="quantity-control">
+            <label for="qty5">Quantity:</label>
+            <input type="number" id="qty5" class="food-qty" value="1" min="1" max="10">
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+
+        <div class="food-item" data-food-id="crispy-onion-rings" data-food-name="Crispy Onion Rings" data-food-price="7.50">
+          <img src="https://placehold.co/600x400/F0E68C/000000?text=Onion+Rings" alt="Crispy Onion Rings">
+          <h3>Crispy Onion Rings</h3>
+          <p class="food-price">$7.50</p>
+          <div class="quantity-control">
+            <label for="qty6">Quantity:</label>
+            <input type="number" id="qty6" class="food-qty" value="1" min="1" max="10">
+          </div>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="cart-overlay" id="cartOverlay">
+    <div class="cart-sidebar">
+      <button class="close-cart-btn" id="closeCartBtn">&times;</button>
+      <h2>Your Cart</h2>
+      <div class="cart-items" id="cartItemsContainer">
+        <p style="text-align: center; color: rgba(255,255,255,0.7);">Your cart is empty.</p>
+      </div>
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      </div>
+  </div>
+
+  <script>
+    // Background Image Slider (Consistent across pages)
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+
+    // Change slide every 5 seconds
+    setInterval(nextSlide, 5000);
+
+    // Mobile menu toggle (Consistent across pages)
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.createElement('div');
+      navToggle.className = 'nav-toggle';
+      navToggle.innerHTML = '☰';
+      navToggle.style.display = 'none';
+      navToggle.style.cursor = 'pointer';
+      navToggle.style.fontSize = '24px';
+      navToggle.style.color = 'white';
+      document.querySelector('header').prepend(navToggle);
+
+      function toggleMenu() {
+        const nav = document.querySelector('nav ul');
+        if (nav.style.display === 'flex') {
+          nav.style.display = 'none';
+        } else {
+          nav.style.display = 'flex';
+        }
+      }
+
+      navToggle.addEventListener('click', toggleMenu);
+
+      function checkScreenSize() {
+        const nav = document.querySelector('nav ul');
+        if (window.innerWidth <= 768) {
+          navToggle.style.display = 'block';
+          nav.style.display = 'none';
+        } else {
+          navToggle.style.display = 'none';
+          nav.style.display = 'flex';
+        }
+      }
+
+      window.addEventListener('resize', checkScreenSize);
+      checkScreenSize();
+    });
+
+    // --- Cart Functionality ---
+    let cart = []; // This array will store our cart items
+
+    const cartIcon = document.getElementById('cartIcon');
+    const cartCount = document.getElementById('cartCount');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const closeCartBtn = document.getElementById('closeCartBtn');
+    const cartItemsContainer = document.getElementById('cartItemsContainer');
+    const cartTotalDisplay = document.getElementById('cartTotal');
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+    // Load cart from localStorage on page load (if any)
+    if (localStorage.getItem('roompailotCart')) {
+        cart = JSON.parse(localStorage.getItem('roompailotCart'));
+        updateCartDisplay();
+    }
+
+    // Add event listeners to all "Add to Cart" buttons
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const foodItemDiv = event.target.closest('.food-item'); // Get the parent food-item div
+            const foodId = foodItemDiv.dataset.foodId;
+            const foodName = foodItemDiv.dataset.foodName;
+            const foodPrice = parseFloat(foodItemDiv.dataset.foodPrice);
+            const foodQuantity = parseInt(foodItemDiv.querySelector('.food-qty').value);
+
+            addItemToCart(foodId, foodName, foodPrice, foodQuantity);
+        });
+    });
+
+    // Function to add/update item in cart
+    function addItemToCart(id, name, price, quantity) {
+        if (quantity <= 0) return; // Don't add if quantity is zero or less
+
+        const existingItemIndex = cart.findIndex(item => item.id === id);
+
+        if (existingItemIndex > -1) {
+            // Item already in cart, update quantity
+            cart[existingItemIndex].quantity += quantity;
+        } else {
+            // Item not in cart, add new item
+            cart.push({ id, name, price, quantity });
+        }
+        
+        saveCartToLocalStorage();
+        updateCartDisplay();
+    }
+
+    // Function to remove an item from the cart
+    function removeItemFromCart(id) {
+        cart = cart.filter(item => item.id !== id); // Filter out the item to be removed
+        saveCartToLocalStorage();
+        updateCartDisplay();
+    }
+
+    // Function to update the cart display (sidebar and count)
+    function updateCartDisplay() {
+        cartItemsContainer.innerHTML = ''; // Clear current cart items
+        let total = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.7);">Your cart is empty.</p>';
+        } else {
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('cart-item');
+                // Use data-id attribute on the button to easily identify which item to remove
+                itemElement.innerHTML = `
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <p>${item.quantity} x $${item.price.toFixed(2)}</p>
+                    </div>
+                    <span class="cart-item-price">$${(item.quantity * item.price).toFixed(2)}</span>
+                    <button class="remove-item-btn" data-id="${item.id}">&times;</button>
+                `;
+                cartItemsContainer.appendChild(itemElement);
+                total += item.quantity * item.price;
+            });
+        }
+
+        cartTotalDisplay.textContent = `$${total.toFixed(2)}`;
+        // Update cart count with total number of unique items, or total quantity
+        cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0); // Total number of *units* in cart
+        // If you want to count unique items instead: cartCount.textContent = cart.length;
+    }
+
+    // Save cart to local storage
+    function saveCartToLocalStorage() {
+        localStorage.setItem('roompailotCart', JSON.stringify(cart));
+    }
+
+    // Toggle cart overlay visibility
+    cartIcon.addEventListener('click', () => {
+        cartOverlay.classList.toggle('show');
+    });
+
+    closeCartBtn.addEventListener('click', () => {
+        cartOverlay.classList.remove('show');
+    });
+
+    // Close cart when clicking outside the sidebar
+    cartOverlay.addEventListener('click', (event) => {
+        if (event.target === cartOverlay) { // Only close if clicking on the overlay background, not the sidebar itself
+            cartOverlay.classList.remove('show');
+        }
+    });
+
+    // Event delegation for dynamically added remove buttons
+    cartItemsContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('remove-item-btn')) {
+            const itemIdToRemove = event.target.dataset.id;
+            removeItemFromCart(itemIdToRemove);
+        }
+    });
+
+    // Initial update of cart display on load
+    updateCartDisplay();
+  </script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - RoomPailot</title>
+  
+  
+    <link rel="icon" href="Image/Logo.png" type="image/png">
+  
+  
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:ital,wght@0,100..1000;1,100..1000&family=Edu+VIC+WA+NT+Hand:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      
+    }
+
+    body {
+        font-family: "Roboto", sans-serif;
+    
+      overflow-x: hidden;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header Styles (Consistent across pages) */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      background-color: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      margin-right: 10px;
+      animation: pulse 2s infinite;
+    }
+
+    .logo h1 {
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    nav ul li a:hover {
+      color: #ffc107;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Hero-like Section for Background and Content (specific to services page) */
+    .hero-services { /* Unique class for services hero section */
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      flex-grow: 1;
+      padding-top: 100px; /* Space for fixed header */
+      padding-bottom: 50px; /* Some padding at the bottom */
+    }
+
+    .hero-services::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6); /* Slightly darker overlay for better text contrast */
+      z-index: 1;
+    }
+
+    /* Sliding Background Images */
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    /* Services Page Specific Styles */
+    .services-container { /* Unique class for services content container */
+      position: relative;
+      z-index: 2;
+      background-color: rgba(255, 255, 255, 0); /* Completely transparent */
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: none;
+      text-align: center;
+      max-width: 1000px; /* Wider max-width for service grid */
+      width: 95%; /* Responsive width */
+      color: white;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+      color: white;
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid for services */
+      gap: 30px; /* More space between service items */
+      justify-content: center;
+      align-items: start;
+    }
+
+    .service-item {
+      background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background for each item */
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Shadow for items */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 25px;
+      text-align: left; /* Align text within service item */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Align icon and text to start */
+    }
+
+    .service-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .service-item img {
+      width: 60px; /* Icon size */
+      height: 60px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); /* Add a glow to icons */
+    }
+
+    .service-item h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #ffc107; /* Service title color */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .service-item p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: white; /* Service description color */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+
+      .logo {
+        margin-bottom: 15px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav ul li {
+        margin: 5px 10px;
+      }
+
+      .hero-services {
+        padding-top: 80px;
+      }
+
+      .services-container {
+        padding: 30px 15px;
+        width: 98%;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr; /* Stack services on small screens */
+      }
+
+      .service-item {
+        padding: 20px;
+      }
+
+      .service-item h2 {
+        font-size: 1.5rem;
+      }
+
+      .service-item img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+     <!--  <img src="Image/Logo.png" alt="Hotel Logo"> -->
+      <h1>RoomPailot</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="UserLoginSuccess.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="Services.html">Services</a></li>
+        <li><a href="Gallery.html">Gallery</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero-services">
+    <div class="slide active" style="background-image: url('Image/B1.jpg');"></div>
+    <div class="slide" style="background-image: url('Image/B2.jpg');"></div>
+    <div class="slide" style="background-image: url('Image/B3.jpg');"></div>
+    <div class="slide" style="background-image: url('Image/B1.jpg');"></div>
+
+    <div class="services-container">
+      <h1>Our World-Class Services</h1>
+      <div class="services-grid">
+
+        <div class="service-item">
+          <img src="https://placehold.co/60x60/FFD700/000000?text=RM" alt="Room Service Icon">
+          <h2>24/7 Room Service</h2>
+          <p>Enjoy delectable meals and refreshing beverages delivered directly to your room, any time of day or night. Our extensive menu caters to all tastes.</p>
+        </div>
+
+        <div class="service-item">
+          <img src="https://placehold.co/60x60/ADD8E6/000000?text=CON" alt="Concierge Icon">
+          <h2>Dedicated Concierge</h2>
+          <p>Our knowledgeable concierge team is on hand to assist with everything from travel arrangements and local recommendations to special requests and event bookings.</p>
+        </div>
+
+        <div class="service-item">
+          <img src="https://placehold.co/60x60/FFC0CB/000000?text=SPA" alt="Spa Icon">
+          <h2>Spa & Wellness Center</h2>
+          <p>Indulge in ultimate relaxation at our luxurious spa, offering a range of treatments, massages, and a serene environment to rejuvenate your mind and body.</p>
+        </div>
+
+        <div class="service-item">
+          <img src="https://placehold.co/60x60/98FB98/000000?text=FIT" alt="Fitness Icon">
+          <h2>State-of-the-Art Fitness Center</h2>
+          <p>Stay active during your stay with our fully equipped fitness center, featuring modern cardio and strength training equipment. Open 24 hours.</p>
+        </div>
+
+        <div class="service-item">
+          <img src="https://placehold.co/60x60/DDA0DD/000000?text=LAU" alt="Laundry Icon">
+          <h2>Professional Laundry Service</h2>
+          <p>We offer reliable and efficient laundry, dry cleaning, and pressing services to ensure your wardrobe is always fresh and ready for any occasion.</p>
+        </div>
+
+        <div class="service-item">
+          <img src="https://placehold.co/60x60/F0E68C/000000?text=BIZ" alt="Business Icon">
+          <h2>Business & Conference Facilities</h2>
+          <p>Equipped with high-speed internet, printing services, and versatile meeting rooms, our business center supports all your professional needs.</p>
+        </div>
+
+        <div class="service-item">
+          <img src="https://placehold.co/60x60/87CEEB/000000?text=PAR" alt="Parking Icon">
+          <h2>Valet Parking</h2>
+          <p>Experience hassle-free arrival and departure with our complimentary valet parking service, ensuring convenience and security for your vehicle.</p>
+        </div>
+
+        <div class="service-item">
+          <img src="https://placehold.co/60x60/FFA07A/000000?text=WIFI" alt="WiFi Icon">
+          <h2>Complimentary Wi-Fi</h2>
+          <p>Stay connected with high-speed, complimentary Wi-Fi available throughout the entire hotel, ensuring you're always just a click away.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Background Image Slider (Consistent across pages)
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+
+    // Change slide every 5 seconds
+    setInterval(nextSlide, 5000);
+
+    // Mobile menu toggle (Consistent across pages)
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.createElement('div');
+      navToggle.className = 'nav-toggle';
+      navToggle.innerHTML = '☰';
+      navToggle.style.display = 'none';
+      navToggle.style.cursor = 'pointer';
+      navToggle.style.fontSize = '24px';
+      navToggle.style.color = 'white';
+      document.querySelector('header').prepend(navToggle);
+
+      function toggleMenu() {
+        const nav = document.querySelector('nav ul');
+        if (nav.style.display === 'flex') {
+          nav.style.display = 'none';
+        } else {
+          nav.style.display = 'flex';
+        }
+      }
+
+      navToggle.addEventListener('click', toggleMenu);
+
+      function checkScreenSize() {
+        const nav = document.querySelector('nav ul');
+        if (window.innerWidth <= 768) {
+          navToggle.style.display = 'block';
+          nav.style.display = 'none';
+        } else {
+          navToggle.style.display = 'none';
+          nav.style.display = 'flex';
+        }
+      }
+
+      window.addEventListener('resize', checkScreenSize);
+      checkScreenSize();
+    });
+  </script>
+</body>
+</html>
