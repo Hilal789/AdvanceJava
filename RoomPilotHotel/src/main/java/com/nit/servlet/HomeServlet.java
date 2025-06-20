@@ -21,6 +21,7 @@ public class HomeServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String path = req.getServletPath();
+		System.out.println(path);
 		HttpSession session = req.getSession(false);
 		switch(path) {
 		case "/UserLoginForm"->{
@@ -33,6 +34,14 @@ public class HomeServlet extends HttpServlet{
 		
 		case "/userRegistration"->{
 			user.registerUser(req, resp);
+		}
+		
+		case "/home"->{
+			resp.sendRedirect("UserLoginSuccess.jsp");
+			}
+		
+		case "/about"->{
+			resp.sendRedirect("About.html");
 		}
 		
 		case "/loginUser"->{

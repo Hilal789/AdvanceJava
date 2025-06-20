@@ -212,6 +212,7 @@
 
 <%
   UserBean bean = (UserBean) session.getAttribute("user");
+if(bean!=null){
   String name = bean.getName();
 %>
 
@@ -221,8 +222,8 @@
   </div>
   <nav>
     <ul>
-      <li><a href="UserLoginSuccess">Home</a></li>
-      <li><a href="About.html">About</a></li>
+      <li><a href="home">Home</a></li>
+     <li><a href="about">About</a></li>
       <li><a href="Services.html">Services</a></li>
       <li><a href="Gallery.html">Gallery</a></li>
       <li><a href="Contact.html">Contact</a></li>
@@ -250,6 +251,6 @@
     </div>
   </div>
 </section>
-
+<%}else{ response.sendRedirect("UserLogin.jsp");} %>
 </body>
 </html>
