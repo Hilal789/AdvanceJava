@@ -1,0 +1,73 @@
+💾 Database Name: RoomPilotHotel
+User Account/Schema: room_pailot
+
+🗂️ 1. Category Table
+Table Name: room_pilot_category
+Stores the categories of food items (e.g., "Beverages", "Main Course").
+
+sql
+Copy
+Edit
+CREATE TABLE room_pilot_category (
+    cat_id   NUMBER(20) PRIMARY KEY,
+    cat_name VARCHAR2(30) NOT NULL
+);
+🍽️ 2. Food Item Table
+Table Name: food_item
+Stores individual food items along with their category and price.
+
+sql
+Copy
+Edit
+CREATE TABLE food_item (
+    food_id   NUMBER(20) PRIMARY KEY,
+    food_name VARCHAR2(30) NOT NULL,
+    price     NUMBER(10,2),
+    cat_id    NUMBER(20),
+    FOREIGN KEY (cat_id) REFERENCES room_pilot_category(cat_id) ON DELETE CASCADE
+);
+🔗 Relationships:
+
+cat_id links to room_pilot_category(cat_id)
+
+Cascade delete ensures food items are deleted if their category is removed.
+
+🧾 3. Order Table
+Table Name: order_details
+Stores food orders made by users.
+
+sql
+Copy
+Edit
+CREATE TABLE order_details (
+    order_id    NUMBER(20) PRIMARY KEY,
+    order_date  VARCHAR2(30),
+    user_id     VARCHAR2(10),
+    food_id     NUMBER,
+    quantity    NUMBER,
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES room_pailot(ID),
+    CONSTRAINT fk_food FOREIGN KEY (food_id) REFERENCES food_item(food_id)
+);
+🔗 Relationships:
+
+user_id refers to room_pailot(ID) — assumes a room_pailot table exists with column ID.
+
+food_id refers to food_item(food_id).
+
+✅ Suggestions / Notes:
+You might consider changing order_date to DATE datatype instead of VARCHAR2(30) for better date management:
+
+sql
+Copy
+Edit
+order_date DATE
+If the room_pailot table isn't yet defined, you might add it like:
+
+sql
+Copy
+Edit
+CREATE TABLE room_pailot (
+    id VARCHAR2(10) PRIMARY KEY,
+    username VARCHAR2(50),
+    password VARCHAR2(50)
+);
